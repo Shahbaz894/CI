@@ -22,7 +22,7 @@ jobs:
       python -m unittest discover
    - name: Creat CML report
      env:
-      REPO TOKEN: ${{}}
+      REPO TOKEN: ${{secrets.SHAHBAZ_GITHUB_PERSONAL_TOKEN}}
      run: |
 
         echo "# First Line of our report" >> report.md
