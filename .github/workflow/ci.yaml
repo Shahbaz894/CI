@@ -1,0 +1,35 @@
+# .github/workflows/ci_cd.yml
+name: CI Pipeline
+
+on:
+  push:
+
+jobs:
+  build:
+   run-on: ubuntu-latest
+
+   steps: 
+   - uses: action/checkout@v3
+   - uses: action/setup-python@v4
+     with:
+      python-version: 3.11.5
+   - uses: iterative/setup-cml@v2
+   - name: Run main file
+     run: |
+      python main.py
+   - name: Run Test
+     run: |
+      python -m unittest discover
+   - name: Creat CML report
+     env:
+      REPO TOKEN: ${{}}
+     run: |
+
+        echo "# First Line of our report" >> report.md
+        echo "## Bar Plots" >> report.md
+        echo '![](./bars.png "Bar plot")' >> report.md
+        echo "## Line Plots" >> report.md
+        echo '![](./lines.png "Bar plot")' >> report.md
+
+        cml comment create report.md
+
